@@ -239,7 +239,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04bd077c34449319a1e4e0bc21cea572960c9ae0d0fefda0dd7c52fcc3c647a3"
 dependencies = [
  "anchor-lang",
- "mpl-token-metadata",
  "spl-associated-token-account",
  "spl-pod",
  "spl-token",
@@ -1363,7 +1362,6 @@ dependencies = [
  "anchor-lang",
  "anchor-spl",
  "mpl-core",
- "solana-program 2.2.1",
 ]
 
 [[package]]
@@ -1389,9 +1387,9 @@ dependencies = [
 
 [[package]]
 name = "mpl-core"
-version = "0.9.1"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "376995625095764ecc2999148b8e94859cb9c180b89161bf82b8122ed2c780e8"
+checksum = "9d6c4e2e24ef8fb0029b0ccdde256c4581c8b7c82e0d3fae65c9904f879a2e17"
 dependencies = [
  "base64 0.22.1",
  "borsh 0.10.4",
@@ -1402,19 +1400,6 @@ dependencies = [
  "rmp-serde",
  "serde_json",
  "solana-program 2.2.1",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "mpl-token-metadata"
-version = "4.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "caf0f61b553e424a6234af1268456972ee66c2222e1da89079242251fa7479e5"
-dependencies = [
- "borsh 0.10.4",
- "num-derive 0.3.3",
- "num-traits",
- "solana-program 1.18.26",
  "thiserror 1.0.69",
 ]
 
