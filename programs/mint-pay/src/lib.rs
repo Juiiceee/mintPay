@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 use mpl_core::{instructions::CreateV1CpiBuilder, types::DataState};
 
-declare_id!("4WRQYnzUNyQ4gMQNct7TqDmKVheHKgA8PzNvmeVaRLZq");
+declare_id!("P4cYdsn1RYax3nA8Pmw54rpraBxKUmPU6PU1ZQC39jA");
 
 #[program]
 pub mod mint_pay {
