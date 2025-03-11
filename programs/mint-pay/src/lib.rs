@@ -5,7 +5,7 @@ use mpl_core::{instructions::CreateV1CpiBuilder, types::DataState};
 declare_id!("4WRQYnzUNyQ4gMQNct7TqDmKVheHKgA8PzNvmeVaRLZq");
 
 #[program]
-pub mod nft_mint_project {
+pub mod mint_pay {
     use super::*;
 
     pub fn initialize_mint(ctx: Context<MintAsset>, name: String, uri: String) -> Result<()> {
@@ -18,7 +18,7 @@ pub mod nft_mint_project {
             .data_state(DataState::AccountState)
             .name(name)
             .uri(uri)
-            .invoke();
+            .invoke()?;
 
         Ok(())
     }
