@@ -54,7 +54,7 @@ pub struct MintAsset<'info> {
     pub mint: Signer<'info>,
     /// CHECK: This is the collection account of the asset to be minted
     #[account(mut)]
-    pub collection: AccountInfo<'info>,
+    pub collection: UncheckedAccount<'info>,
     pub system_program: Program<'info, System>,
     /// CHECK: This is the ID of the Metaplex Core program
     #[account(address = mpl_core::ID)]
