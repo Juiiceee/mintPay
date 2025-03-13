@@ -26,7 +26,7 @@ pub struct MintCollection<'info> {
 impl<'info> MintCollection<'info> {
     pub fn initialize_collection(&mut self, name: String, uri: String, price: u64) -> Result<()> {
         CreateCollectionV1CpiBuilder::new(&self.mpl_core_program.to_account_info())
-            .collection(&self.collection_account.to_account_info())
+            .collection(&self.collection.to_account_info())
             .payer(&self.user.to_account_info())
             .system_program(&self.system_program.to_account_info())
             .name(name.clone())
