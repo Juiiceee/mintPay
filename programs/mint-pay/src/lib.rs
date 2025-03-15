@@ -5,7 +5,7 @@ mod instructions;
 
 use instructions::*;
 
-declare_id!("BVFkXCp3dK1RxBC9MpgEsaBCLw2AHeRyb3rwSH3irjMz");
+declare_id!("DoKegcFEw8xNS5uy8nein8SoPPpzpRoGau45zsB7jcDx");
 
 #[program]
 pub mod mint_pay {
@@ -21,7 +21,8 @@ pub mod mint_pay {
         uri: String,
         price: u64,
     ) -> Result<()> {
-        ctx.accounts.initialize_collection(name, uri, price)
+        // Access the admin bump directly from ctx.bumps
+        let admin_bump = ctx.bumps.admin;
+        ctx.accounts.initialize_collection(name, uri, price, admin_bump)
     }
 }
-

@@ -15,6 +15,14 @@ pub struct MintCollection<'info> {
     pub collection_account: Account<'info, Collection>,
     #[account(mut)]
     pub user: Signer<'info>,
+	#[account(
+        mut,
+        seeds = [b"admin"],
+        bump,
+        seeds::program = crate::id(),
+    )]
+    /// CHECK: Ce compte est un PDA utilisé comme signataire
+    pub admin: UncheckedAccount<'info>,
     #[account(mut)]
     pub collection: Signer<'info>,
     pub system_program: Program<'info, System>,
@@ -24,14 +32,15 @@ pub struct MintCollection<'info> {
 }
 
 impl<'info> MintCollection<'info> {
-    pub fn initialize_collection(&mut self, name: String, uri: String, price: u64) -> Result<()> {
+    pub fn initialize_collection(&mut self, name: String, uri: String, price: u64, admin_bump: u8) -> Result<()> {
         CreateCollectionV1CpiBuilder::new(&self.mpl_core_program.to_account_info())
             .collection(&self.collection.to_account_info())
+            .update_authority(Some(&self.admin.to_account_info()))
             .payer(&self.user.to_account_info())
             .system_program(&self.system_program.to_account_info())
             .name(name.clone())
             .uri(uri.clone())
-            .invoke()?;
+            .invoke_signed(&[&[b"admin", &[admin_bump]]],)?;
         self.collection_account.price = price;
         self.collection_account.name = name;
         self.collection_account.uri = uri;
