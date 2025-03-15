@@ -5,38 +5,25 @@ mod states;
 
 use instructions::*;
 
-declare_id!("DoKegcFEw8xNS5uy8nein8SoPPpzpRoGau45zsB7jcDx");
+declare_id!("4KdNoKt4r4cxqZx2nLJ2Tg6B8nJdwRdi9N8ijKxh5sbg");
 
 #[program]
 pub mod mint_pay {
     use super::*;
 
-    pub fn initialize_mint(ctx: Context<MintAsset>) -> Result<()> {
+    pub fn initialize_mint(ctx: Context<MintAsset>, name: String, uri: String) -> Result<()> {
         // Access the admin bump directly from ctx.bumps
         let admin_bump = ctx.bumps.admin;
-        ctx.accounts.initialize_mint(admin_bump)
+        ctx.accounts.initialize_mint(name, uri, admin_bump)
     }
 
     pub fn initialize_collection(
         ctx: Context<MintCollection>,
         name: String,
         uri: String,
-        price: u64,
     ) -> Result<()> {
-        // Access the admin bump directly from ctx.bumps
         let admin_bump = ctx.bumps.admin;
-        ctx.accounts
-            .initialize_collection(name, uri, price, admin_bump)
-    }
-
-    pub fn test_ids(ctx: Context<TestIds>) -> Result<()> {
-        msg!("System Program ID: {}", ctx.accounts.system_program.key());
-        msg!(
-            "MPL Core Program ID: {}",
-            ctx.accounts.mpl_core_program.key()
-        );
-        msg!("mpl_core::ID: {}", mpl_core::ID);
-        Ok(())
+        ctx.accounts.initialize_collection(name, uri, admin_bump)
     }
 }
 
