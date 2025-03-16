@@ -6,7 +6,7 @@ use mpl_core::{
 };
 use std::str::FromStr;
 
-use crate::states::Collection;
+use crate::states::{Collection, Template};
 
 #[derive(Accounts)]
 pub struct MintAsset<'info> {
@@ -17,8 +17,7 @@ pub struct MintAsset<'info> {
     pub recipient: SystemAccount<'info>,
     #[account(mut)]
     pub mint: Signer<'info>,
-    #[account(mut)]
-    pub collection: Account<'info, Collection>,
+	pub template: Account<'info, Template>,
     /// CHECK: This is the Metaplex collection account
     #[account(mut)]
     pub metaplex_collection: UncheckedAccount<'info>,
@@ -37,7 +36,7 @@ pub struct MintAsset<'info> {
 }
 
 impl<'info> MintAsset<'info> {
-    pub fn initialize_mint(&self, name: String, uri: String, admin_bump: u8) -> Result<()> {
+    pub fn initialize_mint(&self, admin_bump: u8) -> Result<()> {
         CreateV1CpiBuilder::new(&self.mpl_core_program.to_account_info())
             .payer(&self.user.to_account_info())
             .system_program(&self.system_program.to_account_info())
@@ -46,8 +45,8 @@ impl<'info> MintAsset<'info> {
             .authority(Some(&self.admin.to_account_info())) // Gardez l'autorité pour signer
             .owner(Some(&self.user.to_account_info())) // Le propriétaire sera l'utilisateur
             .data_state(DataState::AccountState)
-            .name(name)
-            .uri(uri)
+            .name(self.template.name.clone())
+            .uri(self.template.uri.clone())
             .invoke_signed(&[&[b"admin", &[admin_bump]]])?;
 
         Ok(())
