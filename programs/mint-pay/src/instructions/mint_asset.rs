@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_lang::system_program::{self, Transfer};
 use mpl_core::{
-    instructions::{CreateCollectionV1CpiBuilder, CreateV1CpiBuilder},
+    instructions::CreateV1CpiBuilder,
     types::DataState,
 };
 use std::str::FromStr;

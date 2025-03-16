@@ -4,8 +4,9 @@ mod instructions;
 mod states;
 
 use instructions::*;
+use states::*;
 
-declare_id!("4KdNoKt4r4cxqZx2nLJ2Tg6B8nJdwRdi9N8ijKxh5sbg");
+declare_id!("6MZX72JXyargbjb3Cgx5HzgS5awKdRbciCx3LPHMvhpn");
 
 #[program]
 pub mod mint_pay {
@@ -25,13 +26,15 @@ pub mod mint_pay {
         let admin_bump = ctx.bumps.admin;
         ctx.accounts.initialize_collection(name, uri, admin_bump)
     }
-}
 
-#[derive(Accounts)]
-pub struct TestIds<'info> {
-    #[account(mut)]
-    pub user: Signer<'info>,
-    pub system_program: Program<'info, System>,
-    /// CHECK: This is the ID of the Metaplex Core program
-    pub mpl_core_program: UncheckedAccount<'info>,
+    pub fn create_template(
+        ctx: Context<CreateTemplate>,
+        name: String,
+        description: String,
+        image: String,
+        attribut: Attribut,
+        parameter: Parameter,
+    ) -> Result<()> {
+        ctx.accounts.create_template(name, description, image, attribut, parameter)
+    }
 }

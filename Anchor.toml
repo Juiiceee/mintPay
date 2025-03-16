@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-mint_pay = "4KdNoKt4r4cxqZx2nLJ2Tg6B8nJdwRdi9N8ijKxh5sbg"
+mint_pay = "6MZX72JXyargbjb3Cgx5HzgS5awKdRbciCx3LPHMvhpn"
 
 [registry]
 url = "https://api.apr.dev"

@@ -1,10 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_lang::system_program::{self, Transfer};
 
-use mpl_core::{
-    instructions::{CreateCollectionV1CpiBuilder, CreateV1CpiBuilder},
-    types::DataState,
-};
+use mpl_core::instructions::CreateCollectionV1CpiBuilder;
 
 use crate::states::Collection;
 
@@ -15,7 +11,7 @@ pub struct MintCollection<'info> {
     pub collection_account: Account<'info, Collection>,
     #[account(mut)]
     pub user: Signer<'info>,
-	#[account(
+    #[account(
         mut,
         seeds = [b"admin"],
         bump,
@@ -32,7 +28,12 @@ pub struct MintCollection<'info> {
 }
 
 impl<'info> MintCollection<'info> {
-    pub fn initialize_collection(&mut self, name: String, uri: String, admin_bump: u8) -> Result<()> {
+    pub fn initialize_collection(
+        &mut self,
+        name: String,
+        uri: String,
+        admin_bump: u8,
+    ) -> Result<()> {
         CreateCollectionV1CpiBuilder::new(&self.mpl_core_program.to_account_info())
             .collection(&self.collection.to_account_info())
             .update_authority(Some(&self.admin.to_account_info()))
@@ -40,7 +41,7 @@ impl<'info> MintCollection<'info> {
             .system_program(&self.system_program.to_account_info())
             .name(name.clone())
             .uri(uri.clone())
-            .invoke_signed(&[&[b"admin", &[admin_bump]]],)?;
+            .invoke_signed(&[&[b"admin", &[admin_bump]]])?;
         self.collection_account.collection_address = self.collection.key();
 
         Ok(())
