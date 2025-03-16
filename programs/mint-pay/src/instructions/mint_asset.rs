@@ -6,7 +6,7 @@ use mpl_core::{
 };
 use std::str::FromStr;
 
-use crate::states::{Collection, Template};
+use crate::states::Template;
 
 #[derive(Accounts)]
 pub struct MintAsset<'info> {

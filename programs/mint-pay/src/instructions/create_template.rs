@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::states::template::*;
+use crate::states::Template;
 
 #[derive(Accounts)]
 #[instruction(name: String)]

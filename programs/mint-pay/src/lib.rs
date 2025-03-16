@@ -12,7 +12,6 @@ pub mod mint_pay {
     use super::*;
 
     pub fn initialize_mint(ctx: Context<MintAsset>) -> Result<()> {
-        // Access the admin bump directly from ctx.bumps
         let admin_bump = ctx.bumps.admin;
         ctx.accounts.initialize_mint(admin_bump)
     }
