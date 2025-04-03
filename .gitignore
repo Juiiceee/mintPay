@@ -1,7 +1,15 @@
 .anchor
 .DS_Store
-target
+!target/idl/*
+!target/types/*
+target/debug
+target/.rustc_info.json
+target/CACHEDIR.TAG
+target/release
+target/sbf-solana-solana
+target/deploy
 **/*.rs.bk
 node_modules
 test-ledger
 .yarn
+# Include specific directories that would otherwise be ignored
